@@ -41,6 +41,7 @@ export class EntrepriseService {
   getEntrepriseById(id: number): Observable<Resultat<Entreprise>> {
     return this.http.get<Resultat<Entreprise>>(`${environment.apiUrl}/api/entreprise/${id}`);
   }
+
   supprimerEntreprise(id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/api/entreprise/${id}`);
 

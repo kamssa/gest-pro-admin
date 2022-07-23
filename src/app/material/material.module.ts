@@ -22,6 +22,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const  materialComponents = [
   MatToolbarModule,
@@ -50,7 +51,8 @@ const  materialComponents = [
   MatNativeDateModule,
   MatDialogModule,
   MatSortModule,
-  MatGridListModule
+  MatGridListModule,
+  MatCheckboxModule
 
 ];
 

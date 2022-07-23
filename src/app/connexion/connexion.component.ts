@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../service/auth.service";
-import {Admin} from "../models/Admin";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {Personne} from "../models/Personne";
 
 @Component({
   selector: 'app-connexion',
@@ -44,7 +44,6 @@ export class ConnexionComponent implements OnInit {
   }
   initForm() {
     this.form = this.fb.group({
-      name: [''],
       email: ['', Validators.email],
       password: ['', Validators.required]
     });
@@ -56,11 +55,12 @@ export class ConnexionComponent implements OnInit {
     const email = this.form.value.email;
     const password = this.form.value.password;
     this.loading = true;
-    let  admin : Admin = {
+    let  admin : Personne = {
       email: email,
       password: password,
       type:'ADMIN'
     };
+    console.log(admin);
     this.authService.login(admin).subscribe(data => {
         console.log('auth reussi', data.messages);
         if (data){

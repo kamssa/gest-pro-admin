@@ -7,8 +7,7 @@ import {environment} from "../../environments/environment";
 import {map} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {Manager} from "../models/Manager";
-import {Employe} from "../models/Employe";
+import {Personne} from "../models/Personne";
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +23,7 @@ export class AuthService {
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  login(admin: Admin) {
+  login(admin: Personne) {
     return this.http.post<Resultat<any>>(`${environment.apiUrl}/api/auth/signin`, admin)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -33,38 +32,8 @@ export class AuthService {
         return user;
       }));
   }
-  loginManager(manager: Manager) {
-    return this.http.post<Resultat<any>>(`${environment.apiUrl}/api/auth/signin`, manager)
-      .pipe(map(res => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(res.body.body.accessToken));
-        this.currentUserSubject.next(res.body.body.accessToken);
 
-        const decoded = jwt_decode(res.body.body.accessToken);
-        const exp = this.helper.isTokenExpired(res.body.body.accessToken);
-        console.log(exp);
-        console.log(decoded.exp);
-        console.log(res);
-        this.isUserLoggedIn.next(true);
-        return res;
-      }));
-  }
-  loginEmploye(employe: Employe) {
-    return this.http.post<Resultat<any>>(`${environment.apiUrl}/api/auth/signin`, employe)
-      .pipe(map(res => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(res.body.body.accessToken));
-        this.currentUserSubject.next(res.body.body.accessToken);
 
-        const decoded = jwt_decode(res.body.body.accessToken);
-        const exp = this.helper.isTokenExpired(res.body.body.accessToken);
-        console.log(exp);
-        console.log(decoded.exp);
-        console.log(res);
-        this.isUserLoggedIn.next(true);
-        return res;
-      }));
-  }
 
   logout() {
     // remove user from local storage to log user out

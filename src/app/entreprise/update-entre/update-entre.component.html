@@ -1,1 +1,89 @@
-<p>update-entre works!</p>
+<div class="main-content">
+  <div class="card">
+    <div class="card-header card-header-danger">
+      <h4 class="card-title">Modifier une entreprise</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="entrepriseForm" (ngSubmit)="onSubmit()" *ngIf="entrepriseForm">
+        <div>
+          <mat-form-field >
+            <input matInput type="text" placeholder="Nom de l'entreprise" formControlName="nom"/>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Description de l'entreprise" formControlName="description"/>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Téléphone" formControlName="telephone"/>
+          </mat-form-field>
+          <br>
+          <section class="example-section">
+            <mat-checkbox class="example-margin" formControlName='suspendu'>Suspendu</mat-checkbox>
+          </section>
+          <br>
+          <section class="example-section">
+            <mat-checkbox class="example-margin" formControlName='actevated'>Activer</mat-checkbox>
+          </section>
+          <br>
+          <mat-form-field >
+            <input matInput type="text" placeholder="Logo" formControlName="logo"/>
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput type="text" placeholder="Login" formControlName="email"/>
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput type="text" placeholder="Password" formControlName="password"/>
+          </mat-form-field>
+        </div>
+
+        <br>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle formGroupName="adresse">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Boite postale" formControlName="boitePostal"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Pays" formControlName="pays"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Ville" formControlName="ville"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Lien Facebook" formControlName="lienFacebook"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+              <input matInput type="text" placeholder="Lien LinkedIn" formControlName="lienLinkedIn"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+              <input matInput type="text" placeholder="Lien Twitter" formControlName="lienTwitter"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+              <input matInput type="text" placeholder="Lient Instagram" formControlName="lientInstagram"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Site web" formControlName="siteWeb"/>
+            </mat-form-field>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+        <br>
+
+        <button type="submit" class="btn btn-success">
+          Valider
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

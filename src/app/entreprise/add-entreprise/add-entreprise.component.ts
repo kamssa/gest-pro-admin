@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Manager} from "../../models/Manager";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Entreprise} from "../../models/Entreprise";
-import {ManagerService} from "../../service/manager.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -14,14 +12,12 @@ import {EntrepriseService} from "../../service/entreprise.service";
   styleUrls: ['./add-entreprise.component.scss']
 })
 export class AddEntrepriseComponent implements OnInit {
-  managerForm: FormGroup;
-  entreprises: Entreprise[];
+  entrepriseForm: FormGroup;
   entreprise: Entreprise;
 
   error = '';
   constructor(private entrepriseService: EntrepriseService,
               private  fb: FormBuilder,
-              private managerService: ManagerService,
               private _snackBar: MatSnackBar,
               private router: Router,
               public dialogRef: MatDialogRef<AddEntrepriseComponent>) { }
@@ -31,47 +27,35 @@ export class AddEntrepriseComponent implements OnInit {
     this.initForm();
   }
   initForm(): void{
-    this.managerForm = this.fb.group({
+    this.entrepriseForm = this.fb.group({
       nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      email :['', Validators.required],
+      description: [''],
+      telephone: [''],
+      suspendu :[''],
+      actevated :[''],
+      logo :[''],
+      email : ['', Validators.required],
       password : ['', Validators.required],
-      fonction : ['', Validators.required],
-      entreprise: this.fb.group({
-        id: '',
-        version: '',
-        nom: ['', Validators.required],
-        description:''
-
-      }),
       adresse : this.fb.group({
         boitePostal: '',
         pays: '',
         ville: '',
-        siteWeb: '',
-        telephone: ''
+        lienFacebook: '',
+        lienLinkedIn: '',
+        lienTwitter: '',
+        lientInstagram: '',
+        siteWeb: ''
       }),
-      type: 'MANAGER'
-
+      type:"ENTREPRISE"
     });
   }
 
   onSubmit() {
-    console.log(this.managerForm.value);
-    let formValue = this.managerForm.value;
-    let manager: Manager = {
-      nom : formValue.nom,
-      prenom: formValue.prenom,
-      email: formValue.email,
-      password: formValue.password,
-      fonction: formValue.fonction,
-      entreprise: formValue.entreprise,
-      adresse: formValue.adresse,
+    console.log(this.entrepriseForm.value);
+    let formValue = this.entrepriseForm.value;
 
-      type: 'MANAGER'
-    };
-    console.log('manager', manager);
-    this.managerService.ajoutManager(manager).subscribe(data =>{
+    console.log('entreprise', formValue);
+    this.entrepriseService.ajoutEntreprise(formValue).subscribe(data =>{
       if (data.status === 0){
         this.dialogRef.close(this.entreprise);
         this._snackBar.open('Succès de l\'opération!', '', {

@@ -17,6 +17,7 @@ import {SuccessDialogComponent} from "../../service/shared/dialogs/success-dialo
 import {ListEntrepriseComponent} from "../../entreprise/list-entreprise/list-entreprise.component";
 import {ConnexionComponent} from "../../connexion/connexion.component";
 import {AddEntrepriseComponent} from "../../entreprise/add-entreprise/add-entreprise.component";
+import {UpdateEntreComponent} from "../../entreprise/update-entre/update-entre.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {AddEntrepriseComponent} from "../../entreprise/add-entreprise/add-entrep
     SuccessDialogComponent,
     ListEntrepriseComponent,
     ConnexionComponent,
-    AddEntrepriseComponent
+    AddEntrepriseComponent,
+    UpdateEntreComponent
 
   ],
     imports: [
