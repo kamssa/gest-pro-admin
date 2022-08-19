@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {MatDialogRef} from "@angular/material/dialog";
 import {EntrepriseService} from "../../service/entreprise.service";
+import {NotificationService} from "../../helper/notification.service";
 
 @Component({
   selector: 'app-add-entreprise',
@@ -20,7 +21,8 @@ export class AddEntrepriseComponent implements OnInit {
               private  fb: FormBuilder,
               private _snackBar: MatSnackBar,
               private router: Router,
-              public dialogRef: MatDialogRef<AddEntrepriseComponent>) { }
+              public dialogRef: MatDialogRef<AddEntrepriseComponent>,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
 
@@ -64,8 +66,9 @@ export class AddEntrepriseComponent implements OnInit {
         });
         this.router.navigate(['manager']);
       }else {
-        this.error = data.messages[0];
-        console.log( data.messages);
+        console.log(data.messages);
+        this.notificationService.warn(data.messages) ;
+
       }
 
     }, error => {
